@@ -189,7 +189,7 @@ class FedOpt:
 
             local_updates.append({"updates": updates, "n_samples": size})
 
-        return solution(local_updates, self.num_clients, self.total_number_of_samples)
+        return solution(local_updates)
 
 class FedAdam(FedOpt):
     """FedAdam Strategy class

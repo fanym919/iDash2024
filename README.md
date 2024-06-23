@@ -1,6 +1,6 @@
 # iDash Federated Learning Competition
 
-This tool is built on FLamby. For detailed documentation and information, please visit [FLamby GitHub page](https://github.com/owkin/FLamby)
+This tool is built on FLamby. For detailed documentation and information, please visit [FLamby GitHub page](https://github.com/owkin/FLamby).
 
 ## Table of Contents
 - [Dependencies](#dependencies)
@@ -11,7 +11,9 @@ This tool is built on FLamby. For detailed documentation and information, please
 
 ## Dependencies
 FLamby requires Python 3. You need to install the additional Python libraries listed in ```requirements.txt``` to run FLamby. To install these libraries, run:
-```pip3 install -r requirement.txt```
+```
+pip3 install -r requirement.txt
+```
 
 ## Dataset Description
 
@@ -20,8 +22,6 @@ Preprocessed data is stored in this repo in the file ```flamby/datasets/fed_tcga
 |                      | Center 0 | Center 1 | Center 2 | Center 3 | Center 4 | Center 5 |
 |----------------------|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:
 | No. of Training Data | 279 | 165 | 174 | 131 | 131 | 20
-| No. of Testing Data  | 32  | 31  | 32  | 31  | 31  | 31
-| Total Number of Data | 311 | 196 | 206 | 162 | 162 | 51
 
 The data for all 6 centers is presented in this format, and each data has 42 columns. You can view the raw data at ```flamby/datasets/fed_tcga_brca/brca.csv```
 
@@ -42,9 +42,9 @@ by doing:
 from flamby.datasets.fed_tcga_brca import FedTcgaBrca
 
 # To load the first center as a pytorch dataset
-center0 = FedTcgaBrca(center=0)
+center0 = FedTcgaBrca(center = 0)
 # To load the second center as a pytorch dataset
-center1 = FedTcgaBrca(center=1)
+center1 = FedTcgaBrca(center = 1)
 ```
 
 You can execute the ```getdata.py``` file to load the data in a specific data center. Run
@@ -74,13 +74,11 @@ The demonstration federated learning algorithm is defined in the ```solution``` 
 python3 federated.py
 ```
 
-```solution``` function takes three input parameters: ```local_updates```, ```num_clients```, and ```total_number_of_samples```. ```num_clients``` is equal to 6, since we only have 6 centers, and ```total_number_of_samples``` is equal to 900, which is the total number of data points across all centers. 
-
-local_updates is a list with 6 items, each representing data in one of the 6 centers. Each item is a dictionary in the following format where ```n_samples``` is the number of data in each center
+```solution``` function takes one input parameter ```local_updates```, which is a list with ```n``` items. Since the dataset has 6 centers, there are 6 items in ```local_updates```, and each representing data in one of the 6 centers. Each item is a dictionary in the following format where ```n_samples``` is the number of data in each center
 ```
 {
     "updates": updates, 
     "n_samples": size
 }
  ```
-You can view more details about the local_updates definition in the calc_aggregated_delta_weights method located in ```flamby/strategies/fed_opt.py```, from lines 168 to 192.
+```updates``` is a list of ```numpy.ndarray```, and the total number of data in all centers can be calculated by ```n_samples```. You can view more details about the ```local_updates``` definition in the ```calc_aggregated_delta_weights``` method located in ```flamby/strategies/fed_opt.py```, from lines 168 to 192.
