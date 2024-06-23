@@ -17,17 +17,12 @@ from flamby.strategies.fed_opt import FedAdam as strat
 # Create the training data loaders
 train_dataloaders = [
             torch.utils.data.DataLoader(
-                FedTcgaBrca(center = 0),
-                batch_size = BATCH_SIZE,
-                shuffle = True,
-                num_workers = 0
-            ),
-            torch.utils.data.DataLoader(
-                FedTcgaBrca(center = 1),
+                FedTcgaBrca(center = i),
                 batch_size = BATCH_SIZE,
                 shuffle = True,
                 num_workers = 0
             )
+            for i in range(NUM_CLIENTS)
         ]
 
 lossfunc = BaselineLoss()
@@ -44,19 +39,3 @@ args = {
 s = strat(**args)
 m = s.run()[0]
 
-# Testing
-# Create the testing data loaders
-test_dataloaders = [
-            torch.utils.data.DataLoader(
-                FedTcgaBrca(center = 0, train = False),
-                batch_size = BATCH_SIZE,
-                shuffle = False,
-                num_workers = 0,
-            )
-        ]
-
-dict_cindex = evaluate_model_on_tests(m, test_dataloaders, metric)
-
-for key in dict_cindex:
-    center = key.split("_")[-1]
-    print("Center {}: {}".format(center, dict_cindex[key]))

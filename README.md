@@ -3,10 +3,15 @@
 This tool is built on FLamby. For detailed documentation and information, please visit [FLamby GitHub page](https://github.com/owkin/FLamby)
 
 ## Table of Contents
+- [Dependencies](#dependencies)
 - [Dataset Description](#description)
 - [Using the Dataset](#dataset)
 - [Run Federated Learning](#federated)
 - [Task](#task)
+
+## Dependencies
+FLamby requires Python 3. You need to install the additional Python libraries listed in ```requirements.txt``` to run FLamby. To install these libraries, run:
+```pip3 install -r requirement.txt```
 
 ## Dataset Description
 
@@ -49,6 +54,8 @@ You can execute the ```getdata.py``` file to load the data in a specific data ce
 python3 getdata.py
 ```
 
+The script will display the data in center 0, which has 279 training data points as described in the previous table.
+
 ## Run Federated Learning
 We provide a sample program to train and test the dataset in a specific center using Federated Learning Adam. The sample script is ```federated.py```, and you can run the program with
 ```
@@ -57,9 +64,9 @@ python3 federated.py
 
 This program includes both training and testing sections, providing an end-to-end demonstration of how to run federated learning with this tool.
 
-The script defines the train data loader in variable ```train_dataloaders```. ```train_dataloaders``` is a ```list``` with ```torch.utils.data.DataLoader```. You can change the data center by modify ```center=0```. Meanwhile, you can train multiple center at the same time by adding extra ```torch.utils.data.DataLoader``` with different center number into ```train_dataloaders```. The valid number for data center are 0-5.
+The script defines the train data loader in variable ```train_dataloaders```. ```train_dataloaders``` is a ```list``` with ```torch.utils.data.DataLoader```. We add all six centers into ```train_dataloaders```.
 
-The script also define the test data loader in variable ```test_dataloaders```. ```test_dataloaders``` has the same structure as ```train_dataloaders```.
+After defining ```train_dataloaders```, another dictionary variable ```args``` is initialized. This dictionary includes the previously defined ```train_dataloaders``` and other training parameters.
 
 ## Task
 You need to develop a new federated learning algorithm for this competition. There is no need to modify any part of the tool or data reading process, as everything has already been set up and is ready to use.
@@ -68,3 +75,5 @@ The demonstration federated learning algorithm is defined in the ```solution``` 
 ```
 python3 federated.py
 ```
+
+```solution``` function takes three input parameters: ```local_updates```, ```num_clients```, and ```total_number_of_samples```. ```num_clients``` is equal to 6, since we only have 6 centers, and ```total_number_of_samples``` is equal to 900, which is the total number of data points across all centers.
