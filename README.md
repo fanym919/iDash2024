@@ -76,4 +76,13 @@ The demonstration federated learning algorithm is defined in the ```solution``` 
 python3 federated.py
 ```
 
-```solution``` function takes three input parameters: ```local_updates```, ```num_clients```, and ```total_number_of_samples```. ```num_clients``` is equal to 6, since we only have 6 centers, and ```total_number_of_samples``` is equal to 900, which is the total number of data points across all centers.
+```solution``` function takes three input parameters: ```local_updates```, ```num_clients```, and ```total_number_of_samples```. ```num_clients``` is equal to 6, since we only have 6 centers, and ```total_number_of_samples``` is equal to 900, which is the total number of data points across all centers. 
+
+local_updates is a list with 6 items, each representing data in one of the 6 centers. Each item is a dictionary in the following format where ```n_samples``` is the number of data in each center
+```
+{
+    "updates": updates, 
+    "n_samples": size
+}
+ ```
+You can view more details about the local_updates definition in the calc_aggregated_delta_weights method located in ```flamby/strategies/fed_opt.py```, from lines 168 to 192.
