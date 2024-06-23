@@ -30,7 +30,6 @@ The data for all 6 centers is presented in this format, and each data has 42 col
 | Description        | Clinical data from the TCGA-BRCA study with 1,088 patients.
 | Dataset size       | 117,5 KB (stored in this repository).
 | Centers            | 6 regions - Northeast, South, West, Midwest, Europe, Canada.
-| Records per center | Train/Test: 248/63, 156/40, 164/42, 129/33, 129/33, 40/11.
 | Inputs shape       | 39 features (tabular data).
 | Targets shape      | (E,T). E: relative risk, continuous variable. T: event observed (1) or censorship (0)
 | Total nb of points | 900.
@@ -56,12 +55,12 @@ python3 getdata.py
 The script will display the data in center 0, which has 279 training data points as described in the previous table.
 
 ## Run Federated Learning
-We provide a sample program to train and test the dataset in a specific center using Federated Learning Adam. The sample script is ```federated.py```, and you can run the program with
+We provide a sample program to train the dataset in all centers using Federated Learning Adam. The sample script is ```federated.py```, and you can run the program with
 ```
 python3 federated.py
 ```
 
-This program includes both training and testing sections, providing an end-to-end demonstration of how to run federated learning with this tool.
+This program includes the training section, providing an end-to-end demonstration of how to run federated learning with this tool.
 
 The script defines the train data loader in variable ```train_dataloaders```. ```train_dataloaders``` is a ```list``` with ```torch.utils.data.DataLoader```. We add all six centers into ```train_dataloaders```.
 
