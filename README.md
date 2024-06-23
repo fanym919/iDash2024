@@ -33,7 +33,7 @@ The data for all 6 centers is presented in this format, and each data has 42 col
 | Records per center | Train/Test: 248/63, 156/40, 164/42, 129/33, 129/33, 40/11.
 | Inputs shape       | 39 features (tabular data).
 | Targets shape      | (E,T). E: relative risk, continuous variable. T: event observed (1) or censorship (0)
-| Total no of points | 900.
+| Total nb of points | 900.
 
 
 ## Using the Dataset
